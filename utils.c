@@ -15,26 +15,47 @@
 
 int	ft_formflags(char *pindex, int *len, va_list ap)
 {
-	t_flags	*flag;
 	int	opt;
+	int	lt;
 	char	*nbr;
 	size_t	i;
-	int	x;
 
-	flag = initstruct;
-	nbr = calloc(11, sizeof(char));
+	nbr = ft_calloc(11, sizeof(char));
 	i = 0;
-	x = 0;
-	opt = 0;
-	// fonction pour verifier qu il n'y a pas le meme flags 2 fois ou plus
-	while (checkflags(flag, pindex[++i]))
-	{
-		opt += checkflags(flag, pindex[i]);
-						// on verifira peut etre si il faut verifier si 0 est sortie
-	}
-	while (pindex[i] >= '0' && pindex[i] <= '9' && x < 10)
-		nbr[x++] = pindex[i++];
+	opt = ft_verifflags(&pindex[i], i, g_flag);	// on verifira peut etre si il faut verifier si 0 est sortie
+	while (pindex[i] >= '0' && pindex[i] <= '9' && nbr)
+		nbr++ = pindex[i++];
+	if (pindex[i] =  // verifier les llh d i p x X etc
 	
+}
+
+int	ft_verifflags(char *pos, int *index, t_flags flag)
+{
+	int	i;
+	int	x;
+	int	comb;
+
+	i = 0;
+	comb = 0;
+	while (checkflags(flag, pos[i]) && pos[i])
+	{
+		x = i + 1;
+		while (checkflags(flag, pos[x]), pos[x])
+		{
+			if (pos[i] == pos[x])
+			{
+				while (checkflags(flag, pos[x])
+					x++;
+				*index = *index + x;
+				return (32);
+			}
+			x++;
+		}
+		comb += checkflag(flag, pos[i]);
+		i++;
+	}
+	*index = *index + i;
+	return (comb);
 }
 
 int	checkflags(t_flags *flag, char c)
@@ -65,9 +86,9 @@ size_t	checkchar(const char *str, char c)
 	return (0);
 }
 
-t_flags	*initstruct(void)
+t_flags	*initflag(void)
 {
-	t_flags	flag[6];
+	t_flags	flag[7];
 
 	flag[0]->opt = '+';
 	flag[0]->comb = 1;
@@ -79,5 +100,20 @@ t_flags	*initstruct(void)
 	flag[3]->comb = '8';
 	flag[4]->opt = ' ';
 	flag[5]->comb = 16;
+	flag[6]->opt = '\0';
+	flag[6]->comb = 0;
 	return (flag);
+}
+
+t_flags	*initlength(void)
+{
+	t_flags length[3];
+
+	length[0]->opt = 'h';
+	length[0]->comb = 1;
+	length[1]->opt = 'l';
+	length[1]->comb = 2;
+	length[2]->opt = '\0';
+	length[2]->comb = 0;
+	return (length);
 }
