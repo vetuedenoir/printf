@@ -6,11 +6,11 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 15:19:13 by kscordel          #+#    #+#             */
-/*   Updated: 2022/12/03 19:59:36 by kscordel         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:37:24 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdard.h>
+#include <stdarg.h>
 #include "utils.h"
 
 int	ft_formflags(char *pindex, int *len, va_list ap)
@@ -24,9 +24,17 @@ int	ft_formflags(char *pindex, int *len, va_list ap)
 	i = 0;
 	opt = ft_verifflags(&pindex[i], i, g_flag);	// on verifira peut etre si il faut verifier si 0 est sortie
 	while (pindex[i] >= '0' && pindex[i] <= '9' && nbr)
-		nbr++ = pindex[i++];
-	if (pindex[i] =  // verifier les llh d i p x X etc
-	
+	{
+		*nbr = pindex[i++];
+		nbr++;
+	}
+	while (pindex[i] >= '0' && pindex[i] <= '9')	// passer tout les nombre ??? message d'erreur ?
+		i++;
+	lt = ft_veriflength(pindex[i], i, flag);	// verifier les llh
+	if (ckeckchar(pindex[i]);
+		// fonction qui ecrit et tout
+	else
+		return (0);
 }
 
 int	ft_verifflags(char *pos, int *index, t_flags flag)
@@ -44,10 +52,10 @@ int	ft_verifflags(char *pos, int *index, t_flags flag)
 		{
 			if (pos[i] == pos[x])
 			{
-				while (checkflags(flag, pos[x])
+				while (checkflags(flag, pos[x]))
 					x++;
 				*index = *index + x;
-				return (32);
+				return (OVER_FLAG);
 			}
 			x++;
 		}
@@ -58,15 +66,36 @@ int	ft_verifflags(char *pos, int *index, t_flags flag)
 	return (comb);
 }
 
+int	ft_veriflength(char *pos, int *index, t_flags length )
+{
+	if (checkflags(flag, pos[0]) == 0)
+		return (0);
+	if (checkflags(flag, ppos[0]) == 1)
+	{
+		*i = *i + 1;
+		return (1);
+	}
+	if (checkflags(flag, pos[0]) == 2 && checkflags(flag, pos[1]) == 2)
+	{
+		*i = i* + 2;
+		return (4);
+	}
+	if (checkflags(flag, pos[0]) == 2)
+	{
+		*i = *i + 1;
+		return (2);
+	}
+}
+
 int	checkflags(t_flags *flag, char c)
 {
 	int	i;
 
 	i = 0;
-	while (flag[i])
+	while (flag[i].opt)
 	{
-		if (flag[i]->opt == c)
-			return (flag[i]->comb);
+		if (flag[i].opt == c)
+			return (flag[i].comb);
 		i++;
 	}
 	return (0);
@@ -74,13 +103,13 @@ int	checkflags(t_flags *flag, char c)
 
 size_t	checkchar(const char *str, char c)
 {
-	size_t	i,
+	size_t	i;
 
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == c)
-			return (i + 1);
+			return (c);
 		i++;
 	}
 	return (0);
@@ -88,32 +117,34 @@ size_t	checkchar(const char *str, char c)
 
 t_flags	*initflag(void)
 {
-	t_flags	flag[7];
+	t_flags	iflag[7];
 
-	flag[0]->opt = '+';
-	flag[0]->comb = 1;
-	flag[1]->opt = '-';
-	flag[1]->comb = 2;
-	flag[2]->opt = '0';
-	flag[2]->comb = '4';
-	flag[3]->opt = '#';
-	flag[3]->comb = '8';
-	flag[4]->opt = ' ';
-	flag[5]->comb = 16;
-	flag[6]->opt = '\0';
-	flag[6]->comb = 0;
-	return (flag);
+	iflag[0].opt = '+';
+	iflag[0].comb = 1;
+	iflag[1].opt = '-';
+	iflag[1].comb = 2;
+	iflag[2].opt = '0';
+	iflag[2].comb = '4';
+	iflag[3].opt = '#';
+	iflag[3].comb = '8';
+	iflag[4].opt = ' ';
+	iflag[5].comb = 16;
+	iflag[6].opt = '.';
+	iflag[6].comb = 32;
+	iflag[7].opt = '\0';
+	iflag[7].comb = 0;
+	return (iflag);
 }
 
 t_flags	*initlength(void)
 {
-	t_flags length[3];
+	t_flags ilength[3];
 
-	length[0]->opt = 'h';
-	length[0]->comb = 1;
-	length[1]->opt = 'l';
-	length[1]->comb = 2;
-	length[2]->opt = '\0';
-	length[2]->comb = 0;
-	return (length);
+	ilength[0].opt = 'h';
+	ilength[0].comb = 1;
+	ilength[1].opt = 'l';
+	ilength[1].comb = 2;
+	ilength[2].opt = '\0';
+	ilength[2].comb = 0;
+	return (ilength);
 }

@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/03 16:13:31 by kscordel          #+#    #+#             */
-/*   Updated: 2022/12/05 14:58:20 by kscordel         ###   ########.fr       */
+/*   Created: 2022/12/05 11:21:55 by kscordel          #+#    #+#             */
+/*   Updated: 2022/12/05 19:37:03 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define ITILS_H
-# include <stddef.h>
-
-typedef struct s_flags
-{
-	char	opt;
-	int	comb;
-}		t_flags;
-
-#endif
+#ifndef
+# define PRINTF_H
+# define OVER_FLAG = 64;
 
