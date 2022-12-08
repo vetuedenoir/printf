@@ -13,30 +13,6 @@
 #include <stdarg.h>
 #include "utils.h"
 
-int	ft_formflags(char *pindex, int *len, va_list ap)
-{
-	int	opt;
-	int	lt;
-	char	*nbr;
-	size_t	i;
-
-	nbr = ft_calloc(11, sizeof(char));
-	i = 0;
-	opt = ft_verifflags(&pindex[i], i, g_flag);	// on verifira peut etre si il faut verifier si 0 est sortie
-	while (pindex[i] >= '0' && pindex[i] <= '9' && nbr)
-	{
-		*nbr = pindex[i++];
-		nbr++;
-	}
-	while (pindex[i] >= '0' && pindex[i] <= '9')	// passer tout les nombre ??? message d'erreur ?
-		i++;
-	lt = ft_veriflength(pindex[i], i, flag);	// verifier les llh
-	if (ckeckchar(pindex[i]);
-		// fonction qui ecrit et tout
-	else
-		return (0);
-}
-
 int	ft_verifflags(char *pos, int *index, t_flags flag)
 {
 	int	i;
@@ -101,7 +77,7 @@ int	checkflags(t_flags *flag, char c)
 	return (0);
 }
 
-size_t	checkchar(const char *str, char c)
+char	checkchar(const char *str, char c)
 {
 	size_t	i;
 
@@ -119,9 +95,9 @@ t_flags	*initflag(void)
 {
 	t_flags	iflag[7];
 
-	iflag[0].opt = '+';
+	iflag[0].opt = '-';
 	iflag[0].comb = 1;
-	iflag[1].opt = '-';
+	iflag[1].opt = '+';
 	iflag[1].comb = 2;
 	iflag[2].opt = '0';
 	iflag[2].comb = '4';

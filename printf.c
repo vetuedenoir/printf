@@ -3,9 +3,9 @@
 static const t_flags	g_flag = initflag();
 static const t_flags	g_length = initlength();
 
-int	ft_whichputs(int opt, int lt, int nbr)
+int	ft_whichputs(int opt, int lt, int nbr, char spec)
 {
-	
+	if (	
 }
 
 int	ft_formflags(char *pindex, int *len, va_list ap)
@@ -26,9 +26,9 @@ int	ft_formflags(char *pindex, int *len, va_list ap)
 	while (pindex[i] >= '0' && pindex[i] <= '9')	// passer tout les nombre ??? message d'erreur ?
 		i++;
 	lt = ft_veriflength(pindex[i], i, flag);	// verifier les llh
-	if (ckeckchar(pindex[i]))
+	if (ckeckchar("cspdiuxX%"pindex[i]))
 	{
-		ft_wichputs(opt, lt, ft_atoi(nbr));// fonction qui ecrit et tout
+		ft_wichputs(opt, lt, ft_atoi(nbr), checkchar("cspdiuxX%");// fonction qui ecrit et tout
 		return (i);
 	}
 	else
