@@ -3,21 +3,60 @@
 static const t_flags	g_flag = initflag();
 static const t_flags	g_length = initlength();
 
-int	ft_whichputs(int opt, int lt, int nbr, char spec)
+int	ft_whichinstruct(t_instruction code, int nbr, va_list ap)
 {
-	if (	
+	int	len;
+
+	len = 0;
+	if (code->spec == 'c')
+	{
+		write(1, va_arg(ap, char), 1);
+		len++;
+	}
+	if (code->spec == 's')
+		ft_s_intruct(code, nbr, va_arg(ap, char *));
+	if (code->spec == 'p')
+		ft_p_instruct(code, nbr, va_arg(ap, unsigned long));
+	if (code->spec == 'd' || spec == 'i')
+		ft_di_instruct(code, nbr, ap);
+	if (code->spec == 'u')
+		ft_u_instruct(code, nbr, ap);
+	if (code->spec == 'x' || spec == 'X')
+		ft_xX_instruct(code, nbr, ap);
+	if (code->spec == '%')
+	{
+		write(1, '%', 1);
+		len++;
+	}
+	return (len);
 }
 
 int	ft_formflags(char *pindex, int *len, va_list ap)
 {
-	int	opt;
-	int	lt;
+	t_instruction	code;
 	char	*nbr;
 	size_t	i;
 
 	nbr = ft_calloc(11, sizeof(char));
 	i = 0;
-	opt = ft_verifflags(&pindex[i], i, g_flag);	// on verifira peut etre si il faut verifier si 0 est sortie
+	code->opt = ft_verifflags(&pindex[i], i, g_flag);	// on verifira peut etre si il faut verifier si 0 est sortie
+	while (pindex[i] >= '0' && pindex[i] <= '9' && nbr)
+	{
+		*nbr = pindex[i++];
+		nbr++;
+	}
+	return (len);
+}
+
+int	ft_formflags(char *pindex, int *len, va_list ap)
+{
+	t_instruction	code;
+	char	*nbr;
+	size_t	i;
+
+	nbr = ft_calloc(11, sizeof(char));
+	i = 0;
+	code->opt = ft_verifflags(&pindex[i], i, g_flag);	// on verifira peut etre si il faut verifier si 0 est sortie
 	while (pindex[i] >= '0' && pindex[i] <= '9' && nbr)
 	{
 		*nbr = pindex[i++];
@@ -25,10 +64,11 @@ int	ft_formflags(char *pindex, int *len, va_list ap)
 	}
 	while (pindex[i] >= '0' && pindex[i] <= '9')	// passer tout les nombre ??? message d'erreur ?
 		i++;
-	lt = ft_veriflength(pindex[i], i, flag);	// verifier les llh
-	if (ckeckchar("cspdiuxX%"pindex[i]))
+	code->lt = ft_veriflength(pindex[i], i, flag);	// verifier les llh
+	code->spec = checkchar("cspdiuxX%", pindex[i]);
+	if (code->spec)
 	{
-		ft_wichputs(opt, lt, ft_atoi(nbr), checkchar("cspdiuxX%");// fonction qui ecrit et tout
+		ft_wichinstruct(code, ft_atoi(nbr), ap);// fonction qui ecrit et tout
 		return (i);
 	}
 	else
