@@ -6,29 +6,22 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:18:21 by kscordel          #+#    #+#             */
-/*   Updated: 2022/12/08 21:03:12 by kscordel         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:47:37 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int	ft_s_instruct(t_instruction code, int nbr, char *str)
+int	ft_s_instruct(t_instruction code, char *str)
 {
-	char	*copy;
-	int	len;
-
-	len = 0;
-	copy = NULL;
 	if (code->opt / 32)
 	{
-		len = ft_putnstr(str, nbr);
+		return (ft_putnstr(str, nbr));
 	}
-	len = ft_putnstr(str, -1);
-	return (len);
-
+	return (ft_putnstr(str, -1));
 }
 
-int	ft_p_instruct(t_instruction code, int nbr, unsigned long point)
+int	ft_p_instruct(t_instruction code, unsigned long point)
 {
 	if (!point)
 	{
@@ -42,19 +35,47 @@ int	ft_p_instruct(t_instruction code, int nbr, unsigned long point)
 	}
 }
 
-int	ft_di_instruct(t_instruction code, int nbr, va_list ap)
+int	ft_di_instruct(t_instruction code, va_list ap)
 {
-	if (code->lt = 1)	//si c est un short
+	char	*decopt;
 
-	if (
+	decopt = decodeur(code->opt);
+	if (decopt[6] || decopt[5] || code->nbr)
+	{
+		if (code->lt == 1 || code->lt == 0)
+			str = ft_itoa(va_arg(ap, int));
+		if (code->lt == 2)
+			str = ft_itoal(va_arg(ap, long));
+		if (code-> == 4)
+			str = ft_itoall(va_arg(ap, long long));
+
+	}
 }
 
-int	ft_u_instruct(t_instruction code, int nbr, va_list ap)	// + pas a gerer
+int	ft_u_instruct(t_instruction code, va_list ap)	// + pas a gerer
 {
 
 }
 
-int	ft_xX_instruct(t_instruction code, int nbr, va_list ap)
+int	ft_xX_instruct(t_instruction code, va_list ap)
 {
 	
+}
+
+char	*decodeur(int opt)
+{
+	int	i;
+	char	str[7];
+	int	diviseur;
+
+	i = 6;
+	str[i--] = '\0';
+	diviseur = 64;
+	while (i--)
+	{
+		opt %= diviseur;
+		diviseur /= 2;
+		str[i] = opt / diviseur;
+	}
+	return (str);
 }

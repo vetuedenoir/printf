@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 15:19:13 by kscordel          #+#    #+#             */
-/*   Updated: 2022/12/05 19:37:24 by kscordel         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:47:43 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,34 @@ int	ft_veriflength(char *pos, int *index, t_flags length )
 	}
 }
 
+int	ft_verifnbr(char *pos, int *index)
+{
+	char	*nbr;
+	int	i;
+	int	nb;
+
+	i = 0;
+	nb = 0;
+	if (pos[0] >= '0' && pos[0] <= '9')
+	{
+		nbr = calloc(11, sizeof(char));
+		while (pos[i] >= '0' && pos[i] <= '9' && i < 10)
+		{
+			*nbr = pos[i++];
+			nbr++;
+			*index = *index + 1;
+		}
+		while (pos[i] >= '0' && pos[i] <= '9')		// passer tout les nombre ??? message d'erreur ?
+		{
+			i++;
+			*index = *index + 1;
+		}
+		nb = ft_atoi(nbr);
+		free(nbr);
+	}
+	return (nb);
+}
+
 int	checkflags(t_flags *flag, char c)
 {
 	int	i;
@@ -99,11 +127,11 @@ t_flags	*initflag(void)
 	iflag[0].comb = 1;
 	iflag[1].opt = '+';
 	iflag[1].comb = 2;
-	iflag[2].opt = '0';
+	iflag[2].opt = ' ';
 	iflag[2].comb = '4';
 	iflag[3].opt = '#';
 	iflag[3].comb = '8';
-	iflag[4].opt = ' ';
+	iflag[4].opt = '0';
 	iflag[5].comb = 16;
 	iflag[6].opt = '.';
 	iflag[6].comb = 32;
