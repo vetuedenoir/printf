@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 15:19:13 by kscordel          #+#    #+#             */
-/*   Updated: 2022/12/09 14:47:43 by kscordel         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:38:56 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ int	ft_verifflags(char *pos, int *index, t_flags flag)
 
 	i = 0;
 	comb = 0;
-	while (checkflags(flag, pos[i]) && pos[i])
+	while (parsflag(pos[i]) && pos[i]) 		// +   # 0 -
 	{
 		x = i + 1;
-		while (checkflags(flag, pos[x]), pos[x])
+		while (parsflag(pos[x]), pos[x])	// +   # 0 -
 		{
 			if (pos[i] == pos[x])
 			{
-				while (checkflags(flag, pos[x]))
+				while (parsflag(pos[x]))
 					x++;
 				*index = *index + x;
 				return (OVER_FLAG);
 			}
 			x++;
 		}
-		comb += checkflag(flag, pos[i]);
+		comb += parsflag(pos[i]);
 		i++;
 	}
 	*index = *index + i;
@@ -91,17 +91,18 @@ int	ft_verifnbr(char *pos, int *index)
 	return (nb);
 }
 
-int	checkflags(t_flags *flag, char c)
+int	parsflag(char c)
 {
-	int	i;
-
-	i = 0;
-	while (flag[i].opt)
-	{
-		if (flag[i].opt == c)
-			return (flag[i].comb);
-		i++;
-	}
+	if (c == '-')
+		return (1);
+	if (c == '+')
+		return (2);
+	if (c == ' ')
+		return (4);
+	if (c == '#')
+		return (8);
+	if (c == '0')
+		return (16);
 	return (0);
 }
 
@@ -117,38 +118,4 @@ char	checkchar(const char *str, char c)
 		i++;
 	}
 	return (0);
-}
-
-t_flags	*initflag(void)
-{
-	t_flags	iflag[7];
-
-	iflag[0].opt = '-';
-	iflag[0].comb = 1;
-	iflag[1].opt = '+';
-	iflag[1].comb = 2;
-	iflag[2].opt = ' ';
-	iflag[2].comb = '4';
-	iflag[3].opt = '#';
-	iflag[3].comb = '8';
-	iflag[4].opt = '0';
-	iflag[5].comb = 16;
-	iflag[6].opt = '.';
-	iflag[6].comb = 32;
-	iflag[7].opt = '\0';
-	iflag[7].comb = 0;
-	return (iflag);
-}
-
-t_flags	*initlength(void)
-{
-	t_flags ilength[3];
-
-	ilength[0].opt = 'h';
-	ilength[0].comb = 1;
-	ilength[1].opt = 'l';
-	ilength[1].comb = 2;
-	ilength[2].opt = '\0';
-	ilength[2].comb = 0;
-	return (ilength);
 }

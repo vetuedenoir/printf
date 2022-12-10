@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:22:34 by kscordel          #+#    #+#             */
-/*   Updated: 2022/12/09 16:37:50 by kscordel         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:10:50 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ t_flags	*initflag(void)
 	iflag[3].opt = '#';
 	iflag[3].comb = '8';
 	iflag[4].opt = '0';
-	iflag[5].comb = 16;
-	iflag[6].opt = '.';
-	iflag[6].comb = 32;
-	iflag[7].opt = '\0';
-	iflag[7].comb = 0;
+	iflag[4].comb = 16;
+	iflag[5].opt = '.';
+	iflag[5].comb = 32;
+	iflag[6].opt = '\0';
+	iflag[6].comb = 0;
 	return (iflag);
 }
 

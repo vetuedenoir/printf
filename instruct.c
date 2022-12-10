@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:18:21 by kscordel          #+#    #+#             */
-/*   Updated: 2022/12/09 14:47:37 by kscordel         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:39:05 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_s_instruct(t_instruction code, char *str)
 {
-	if (code->opt / 32)
+	if (code->precision)
 	{
-		return (ft_putnstr(str, nbr));
+		return (ft_putnstr(str, code->nombre));
 	}
 	return (ft_putnstr(str, -1));
 }
@@ -39,15 +39,7 @@ int	ft_di_instruct(t_instruction code, va_list ap)
 {
 	char	*decopt;
 
-	decopt = decodeur(code->opt);
-	if (decopt[6] || decopt[5] || code->nbr)
-	{
-		if (code->lt == 1 || code->lt == 0)
-			str = ft_itoa(va_arg(ap, int));
-		if (code->lt == 2)
-			str = ft_itoal(va_arg(ap, long));
-		if (code-> == 4)
-			str = ft_itoall(va_arg(ap, long long));
+	decopt = decodeur(code->flags);
 
 	}
 }

@@ -37,13 +37,21 @@ int	ft_formflags(char *pindex, int *len, va_list ap)
 	size_t	i;
 
 	i = 0;
-	code->opt = ft_verifflags(&pindex[i], &i, g_flag);	// on verifira peut etre si il faut verifier si 0 est sortie
-	code->nbr = ft_verifnbr(&pindex[i], &i);		// passer tout les nombre ??? message d'erreur 
-	code->lt = ft_veriflength(pindex[i], i, flag);		// verifier les llh
-	code->spec = checkchar("cspdiuxX%", pindex[i]);
-	if (code->spec)
+	code->flags = ft_verifflags(&pindex[i], &i, g_flag);	// on verifira peut etre si il faut verifier si 0 est sortie
+	code->width = ft_verifnbr(&pindex[i], &i);		// passer tout les nombre ??? message d'erreur
+	if (pindex[i] == '.');
 	{
-		if (code->opt != OVER_FLAG)
+		code->precision = 1;					// precision    .number
+		i++;
+		code->number = ft_verifnbr(&pindex[i], &i);
+	}
+	else
+		code->precision = 1;
+	code->length = ft_veriflength(pindex[i], i, flag);		// verifier les llh
+	code->specifier = checkchar("cspdiuxX%", pindex[i]);
+	if (code->specifier)
+	{
+		if (code->flags != OVER_FLAG)
 			*len = *len + ft_wichinstruct(code, ap);	// fonction qui ecrit et tout
 		return (i);
 	}
