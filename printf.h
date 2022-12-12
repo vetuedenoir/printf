@@ -16,11 +16,11 @@
 
 typedef struct s_intruction
 {
-	int	flags;
+	char	flags;
 	int	width;
 	char	precision;
 	int	number;
-	int	length;
+	char	length;
 	char	specifier;
 }
 		t_instruction;

@@ -37,9 +37,10 @@ int	ft_p_instruct(t_instruction code, unsigned long point)
 
 int	ft_di_instruct(t_instruction code, va_list ap)
 {
-	char	*decopt;
+	char	decopt[6];
 
-	decopt = decodeur(code->flags);
+	decopt = memset(decopt, 0, 6);
+	decopt = decodeur(decopt, code->flags);
 
 	}
 }
@@ -54,20 +55,13 @@ int	ft_xX_instruct(t_instruction code, va_list ap)
 	
 }
 
-char	*decodeur(int opt)
+char	*decodeur(char *str, char opt)
 {
-	int	i;
-	char	str[7];
-	int	diviseur;
-
-	i = 6;
-	str[i--] = '\0';
-	diviseur = 64;
-	while (i--)
+	while (opt)
 	{
-		opt %= diviseur;
-		diviseur /= 2;
-		str[i] = opt / diviseur;
+
+		str[i] = opt % 2;
+		opt = opt >> 1;
 	}
 	return (str);
 }

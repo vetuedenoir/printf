@@ -44,23 +44,23 @@ int	ft_verifflags(char *pos, int *index, t_flags flag)
 
 int	ft_veriflength(char *pos, int *index, t_flags length )
 {
-	if (checkflags(flag, pos[0]) == 0)
-		return (0);
-	if (checkflags(flag, ppos[0]) == 1)
+	if (pos[0] == 'h')
 	{
 		*i = *i + 1;
 		return (1);
 	}
-	if (checkflags(flag, pos[0]) == 2 && checkflags(flag, pos[1]) == 2)
+	if (pos[0] == 'l' && pos[1] == 'l')
 	{
 		*i = i* + 2;
 		return (4);
 	}
-	if (checkflags(flag, pos[0]) == 2)
+	if (pos[0] == 'l')
 	{
 		*i = *i + 1;
 		return (2);
 	}
+	else
+		return (0);
 }
 
 int	ft_verifnbr(char *pos, int *index)
